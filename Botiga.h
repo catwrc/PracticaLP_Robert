@@ -1,6 +1,6 @@
 #pragma once
 #include "Magatzem.h"
-//#include <string>
+
 
 /**
 * Clase para gestionar las acciones y el estoc de cada una de las tiendas que pertenecen a la empresa.
@@ -10,21 +10,26 @@
 * Ademas, la tienda necesita saber su estoc total.
 **/
 
-class Botiga
-{
+class Botiga {
 public:
-	Botiga(string nom, string codi) { m_nom = nom; m_codi = codi; }
+	Botiga() {}
+	Botiga(string nom, string codi) : m_nom(nom), m_codi(codi) {}
+	Botiga(const Botiga& b);
+	Botiga& operator=(const Botiga& b);
+	~Botiga();
+
 	bool solicitaComanda(const Comanda& c, Magatzem& m);
 	map<string, priority_queue<Bicicleta*>> getStockBotiga() const;
 	void mostraCataleg();
 	int calculaStockTotal();
-	string getNom() const {return m_nom;}
-	void setNom(const string& nom);
-	string getCodi() const {return m_codi;}
-	void setCodi(const string& codi);
+
+	string getNom() const { return m_nom; }
+	string getCodi() const { return m_codi; }
+
+	void setNom(const string& nom) { m_nom = nom; }
+	void setCodi(const string& codi) { m_codi = codi; }
 private:
 	string m_nom;
 	string m_codi;
-
-
+	map<string, priority_queue<Bicicleta*>> m_stockBotiga;
 };

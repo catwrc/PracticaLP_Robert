@@ -71,7 +71,7 @@ bool Proveidor::procesaComanda(Comanda c, Magatzem & m)
 	
 	
 	Proveidor p;
-	Data data = p.generaDataEnviament(c.getDataEntregaPrevista,10 );
+	Data data = p.generaDataEnviament(c.getDataEntregaPrevista,60 );
 	trobat= m.rebreComanda(c, vector_bici, data);
 
 	return trobat;

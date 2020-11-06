@@ -18,20 +18,24 @@ enum class Modalitat {
 
 /**
 * BicicletaMTB contine la inforacion relenavte para definir una bicicleta MTB.
-* 
+*
 **/
 
-class BicicletaMTB: public Bicicleta
-{
+class BicicletaMTB : public Bicicleta {
 public:
-	BicicletaMTB(const string& model, string descripcio, const int& temporada, const Talla& talla, const Quadre& quadre, const Roda& roda, const Fre& fre, TipusBicicleta tipus, Categoria categoria, Modalitat modalitat, bool electrica) { Bicicleta(model, descripcio, temporada, talla, quadre, roda, fre, tipus); m_categoria = categoria; m_modalitat = modalitat; m_electrica = electrica; }
+	BicicletaMTB() {}
+	BicicletaMTB(const string& model, string descripcio, const int& temporada, const Talla& talla, const Quadre& quadre, const Roda& roda, const Fre& fre, TipusBicicleta tipus, Categoria categoria, Modalitat modalitat, bool electrica) :
+		Bicicleta(model, descripcio, temporada, talla, quadre, roda, fre, tipus), m_categoria(categoria), m_modalitat(modalitat), m_electrica(electrica) {}
+	BicicletaMTB(const BicicletaMTB& bm) : Bicicleta(bm) { m_categoria = bm.m_categoria; m_modalitat = bm.m_modalitat; m_electrica = bm.m_electrica; }
+	BicicletaMTB* clone() { return new BicicletaMTB(*this); }
 	~BicicletaMTB() override;
-	void setCategoria(const Categoria& categoria) { m_categoria = categoria; }
-	Categoria getCategoria() const { return m_categoria; }
-	void setModalitat(const Modalitat& modalitat) { m_modalitat = modalitat; }
-	Modalitat getModalitat() const { return m_modalitat; }
-	void setElectrica(const bool& electrica) { m_electrica = electrica; };
-	bool getElectrica() const { return m_electrica; }
+
+	void setCategoria(const Categoria& categoria);
+	Categoria getCategoria() const;
+	void setModalitat(const Modalitat& modalitat);
+	Modalitat getModalitat() const;
+	void setElectrica(const bool& electrica);
+	bool getElectrica() const;
 	void setRoda(const Roda& roda) override;
 	void setFre(const Fre& fre) override;
 	void setTipus(TipusBicicleta tipus) override;
@@ -39,7 +43,6 @@ public:
 protected:
 	ostream& format(ostream& os) const override;
 private:
-
 	Categoria m_categoria;
 	Modalitat m_modalitat;
 	bool m_electrica;
